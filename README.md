@@ -133,3 +133,14 @@ http://127.0.0.1:8000/redoc/
 2. @____________ 
 
 3. @____________
+
+
+### Разворачивание проекта с помощью Docker 
+Из директории infra_sp2/infra выполнить команду: ```docker-compose up --build -d```
+
+После этого проект будет доступен по url: ```localhost/```
+
+## Миграции и superuser 
+```docker exec -it infra_web_1 bash``` - попадете в bash терминал контейнера с Django App
+```python3 manage.py makemigrations; python3 manage.py migrate; python3 manage.py createsuperuser```
+После этого регестрируетесь как админ. Вам станет доступна админ зона ```localhost/admin```
