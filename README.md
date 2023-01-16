@@ -128,19 +128,36 @@ http://127.0.0.1:8000/redoc/
 
 ### Авторы 
 
-1. @____________ 
+1. @manya48 
 
-2. @____________ 
+2. @YuryDeNorth 
 
-3. @____________
+3. @komar197
 
 
-### Разворачивание проекта с помощью Docker 
-Из директории infra_sp2/infra выполнить команду: ```docker-compose up --build -d```
+# Разворачивание проекта с помощью Docker
+
+## Наполнение .env файла:
+DB_NAME=имя_базы_данных
+POSTGRES_USER=логин_для_подключения_к_базе_данных
+POSTGRES_PASSWORD=пароль_для_подключения_к_БД_установите_свой
+DB_HOST=название_контейнера
+DB_PORT=порт_для_подключения_к_БД
+
+*!!! Сам файл должен находится в infra_sp2/infra (в папке с docker-compose.yalm)*
+
+## Запуск сервера
+Из директории infra_sp2/infra выполнить команду: ```sudo docker-compose up --build -d```
 
 После этого проект будет доступен по url: ```localhost/```
+Пока что не готов к эксплуатированию
 
 ## Миграции и superuser 
-```docker exec -it infra_web_1 bash``` - попадете в bash терминал контейнера с Django App
-```python3 manage.py makemigrations; python3 manage.py migrate; python3 manage.py createsuperuser```
+```sudo docker exec -it infra_web_1 bash``` - попадете в bash терминал контейнера с Django App
+```python3 manage.py makemigrations; python3 manage.py migrate; python3 manage.py collectstatic; python manage.py loaddata fixtures.json --app reviews```
+Печатаем *yes*
+```python3 manage.py createsuperuser```
 После этого регестрируетесь как админ. Вам станет доступна админ зона ```localhost/admin```
+Теперь все работает
+
+Чтобы остановить работу контейнера: ```sudo docker-compose stop```
